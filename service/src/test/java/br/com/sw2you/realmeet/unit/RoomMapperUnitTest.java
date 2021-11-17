@@ -1,28 +1,27 @@
 package br.com.sw2you.realmeet.unit;
 
-import br.com.sw2you.realmeet.domain.entity.Room;
+import br.com.sw2you.realmeet.core.BaseUnitTest;
 import br.com.sw2you.realmeet.mapper.RoomMapper;
-import br.com.sw2you.realmeet.utils.MapperUtils;
+import br.com.sw2you.realmeet.utils.TestConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 
+import static br.com.sw2you.realmeet.utils.MapperUtils.roomMapper;
+import static br.com.sw2you.realmeet.utils.TestDataCreator.newRoomBuilder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ExtendWith(MockitoExtension.class)
-class RoomMapperUnitTest {
+class RoomMapperUnitTest extends BaseUnitTest {
 
     private RoomMapper victim;
 
     @BeforeEach
     void setupEach() {
-        victim = MapperUtils.roomMapper();
+        victim = roomMapper();
     }
 
     @Test
     void testFromEntityToDto() {
-        var room = Room.newBuilder().withId(1L).withName("Room A").withSeats(6).build();
+        var room = newRoomBuilder().withId(TestConstants.DEFAULT_ROOM_ID).build();
         var dto = victim.fromEntityToDto(room);
 
         assertEquals(room.getId(), dto.getId());
