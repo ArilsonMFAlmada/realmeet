@@ -27,4 +27,5 @@ public class RoomController implements RoomsApi {
     public CompletableFuture<ResponseEntity<RoomDTO>> getRoom(Long id) {
         return supplyAsync(() -> roomService.getRoom(id), controllerExecutor).thenApply(ResponseEntityUtils::ok);
     }
+
 }
